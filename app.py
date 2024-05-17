@@ -30,7 +30,7 @@ def get_unique_movies(movies):
     return list(unique_movies.values())
 
 movies = read_csv('data.csv')
-#unique_movies = get_unique_movies(movies)
+unique_movies = get_unique_movies(movies)
 
 @app.route('/', methods=['GET', 'POST'])
 def pseudo():
@@ -45,7 +45,7 @@ def index():
     if 'pseudo' not in session:
         return redirect(url_for('pseudo'))
     #return render_template('index.html', movies=unique_movies)
-    random_movies = np.random.choice(movies, 8, replace=False).tolist()  # Select 8 random movies
+    random_movies = np.random.choice(unique_movies, 8, replace=False).tolist()
     return render_template('index.html', movies=random_movies)
 
 @app.route('/quiz/<video_id>', methods=['GET', 'POST'])

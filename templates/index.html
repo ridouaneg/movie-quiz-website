@@ -10,13 +10,14 @@
     <h1>Movie Quiz</h1>
     <div class="movie-list">
         {% for movie in movies %}
-            <div class="movie-item">
-                <div class="thumbnail-container">
-                    <img src="{{ movie.thumbnail }}" alt="Movie Thumbnail" class="thumbnail">
+            <a href="{{ url_for('quiz', video_id=movie.video_id) }}" class="movie-item-link">
+                <div class="movie-item">
+                    <div class="thumbnail-container">
+                        <img src="{{ movie.thumbnail }}" alt="Movie Thumbnail" class="thumbnail">
+                    </div>
+                    <h2>{{ movie.movie_title }}</h2>
                 </div>
-                <h2>{{ movie.movie_title }}</h2>
-                <a href="{{ url_for('quiz', video_id=movie.video_id) }}" class="quiz-link">Take Quiz</a>
-            </div>
+            </a>            
         {% endfor %}
     </div>
 </body>
