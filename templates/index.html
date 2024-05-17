@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Movie Quiz</h1>
+    <div class="movie-list">
+        {% for movie in movies %}
+            <div class="movie-item">
+                <div class="thumbnail-container">
+                    <img src="{{ movie.thumbnail }}" alt="Movie Thumbnail" class="thumbnail">
+                </div>
+                <a href="{{ url_for('quiz', movie_id=movie.movie_id) }}" class="quiz-link">Take Quiz</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

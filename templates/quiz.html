@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz</h1>
+        {% if questions %}
+            <div class="quiz-video">
+                <iframe width="560" height="315" src="{{ questions[0].video_path }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <form method="POST" class="quiz-form">
+                {% for question in questions %}
+                    <div class="quiz-question">
+                        <p class="question-text">{{ question.question }}</p>
+                        {% for i in range(5) %}
+                            <div class="quiz-option">
+                                <input type="radio" id="option_{{ question.question_id }}_{{ i }}" name="option_{{ question.question_id }}" value="{{ question['option_' ~ i] }}" required>
+                                <label for="option_{{ question.question_id }}_{{ i }}">{{ question['option_' ~ i] }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <hr class="question-divider">
+                {% endfor %}
+                <button type="submit" class="submit-button">Submit Answers</button>
+            </form>
+        {% else %}
+            <p>No questions found for this movie.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
