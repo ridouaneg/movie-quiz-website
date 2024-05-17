@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Quiz</h1>
+        <h1>{{ movie_title }}</h1>
         {% if questions %}
             <div class="quiz-video">
                 <iframe width="560" height="315" src="{{ questions[0].video_path }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

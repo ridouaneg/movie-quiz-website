@@ -14,7 +14,8 @@
                 <div class="thumbnail-container">
                     <img src="{{ movie.thumbnail }}" alt="Movie Thumbnail" class="thumbnail">
                 </div>
-                <a href="{{ url_for('quiz', movie_id=movie.movie_id) }}" class="quiz-link">Take Quiz</a>
+                <h2>{{ movie.movie_title }}</h2>
+                <a href="{{ url_for('quiz', video_id=movie.video_id) }}" class="quiz-link">Take Quiz</a>
             </div>
         {% endfor %}
     </div>

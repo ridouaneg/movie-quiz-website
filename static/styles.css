@@ -1,3 +1,4 @@
+/* General styling */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -12,6 +13,14 @@ h1 {
     margin-bottom: 30px;
 }
 
+h2 {
+    font-size: 20px;
+    color: #333;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Index page movie list styling */
 .movie-list {
     display: flex;
     flex-wrap: wrap;
