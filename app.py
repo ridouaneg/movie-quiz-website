@@ -17,10 +17,10 @@ def read_csv(file_path):
             data.append(row)
     return data
 
-def save_answer(pseudo, video_id, question_id, selected_option):
+def save_answer(pseudo, video_id, question_id, selected_option, watched):
     with open('answers.csv', 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([pseudo, video_id, question_id, selected_option])
+        writer.writerow([pseudo, video_id, question_id, selected_option, watched])
 
 def get_unique_movies(movies):
     unique_movies = {}
@@ -44,7 +44,6 @@ def pseudo():
 def index():
     if 'pseudo' not in session:
         return redirect(url_for('pseudo'))
-    #return render_template('index.html', movies=unique_movies)
     random_movies = np.random.choice(unique_movies, 8, replace=False).tolist()
     return render_template('index.html', movies=random_movies)
 
@@ -62,10 +61,29 @@ def quiz(video_id):
             question_id = question['question_id']
             selected_option = request.form.get(f'option_{question_id}')
             if selected_option:
-                save_answer(pseudo, video_id, question_id, selected_option)
-        return redirect(url_for('index'))
+                save_answer(pseudo, video_id, question_id, selected_option, watched=False)
+        return redirect(url_for('full_quiz', video_id=video_id))
 
     return render_template('quiz.html', questions=questions, movie_title=movie_title)
+
+@app.route('/full_quiz/<video_id>', methods=['GET', 'POST'])
+def full_quiz(video_id):
+    if 'pseudo' not in session:
+        return redirect(url_for('pseudo'))
+
+    questions = [movie for movie in movies if movie['video_id'] == video_id]
+    movie_title = questions[0]['movie_title'] if questions else 'Unknown Title'
+
+    if request.method == 'POST':
+        pseudo = session['pseudo']
+        for question in questions:
+            question_id = question['question_id']
+            selected_option = request.form.get(f'option_{question_id}')
+            if selected_option:
+                save_answer(pseudo, video_id, question_id, selected_option, watched=True)
+        return redirect(url_for('index'))
+
+    return render_template('full_quiz.html', questions=questions, movie_title=movie_title)
 
 if __name__ == '__main__':
     app.run(debug=True)

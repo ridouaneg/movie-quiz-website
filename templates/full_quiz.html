@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Full Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="quiz-container">
         <h1>{{ movie_title }}</h1>
         {% if questions %}
-        <div class="warning-message">
-            <p><strong>Sanity Check:</strong> Please guess the answers to the questions below without watching the movie first. After submitting your answers, you will be redirected to a page where you can watch the movie and answer the questions again.</p>
-        </div>
+            <div class="quiz-video">
+                <iframe width="560" height="315" src="{{ questions[0].video_path }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <form method="POST" class="quiz-form">
                 {% for question in questions %}
                     <div class="quiz-question">

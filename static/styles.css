@@ -20,6 +20,17 @@ h2 {
     text-align: center;
 }
 
+.warning-message {
+    background-color: #ffeb3b;
+    border: 1px solid #ffeb3b;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #333;
+}
+
 /* Index page movie list styling */
 .movie-list {
     display: flex;
