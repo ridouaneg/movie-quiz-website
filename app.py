@@ -17,10 +17,10 @@ def read_csv(file_path):
             data.append(row)
     return data
 
-def save_answer(pseudo, video_id, question_id, selected_option, watched):
+def save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched):
     with open('answers.csv', 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([pseudo, video_id, question_id, selected_option, watched])
+        writer.writerow([pseudo, gender, age, video_id, question_id, selected_option, watched])
 
 def get_unique_movies(movies):
     unique_movies = {}
@@ -36,7 +36,11 @@ unique_movies = get_unique_movies(movies)
 def pseudo():
     if request.method == 'POST':
         pseudo = request.form.get('pseudo')
+        gender = request.form.get('gender')
+        age = request.form.get('age')
         session['pseudo'] = pseudo
+        session['gender'] = gender
+        session['age'] = age
         return redirect(url_for('index'))
     return render_template('pseudo.html')
 
@@ -57,11 +61,13 @@ def quiz(video_id):
 
     if request.method == 'POST':
         pseudo = session['pseudo']
+        gender = session['gender']
+        age = session['age']
         for question in questions:
             question_id = question['question_id']
             selected_option = request.form.get(f'option_{question_id}')
             if selected_option:
-                save_answer(pseudo, video_id, question_id, selected_option, watched=False)
+                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=False)
         return redirect(url_for('full_quiz', video_id=video_id))
 
     return render_template('quiz.html', questions=questions, movie_title=movie_title)
@@ -76,11 +82,13 @@ def full_quiz(video_id):
 
     if request.method == 'POST':
         pseudo = session['pseudo']
+        gender = session['gender']
+        age = session['age']
         for question in questions:
             question_id = question['question_id']
             selected_option = request.form.get(f'option_{question_id}')
             if selected_option:
-                save_answer(pseudo, video_id, question_id, selected_option, watched=True)
+                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=True)
         return redirect(url_for('index'))
 
     return render_template('full_quiz.html', questions=questions, movie_title=movie_title)

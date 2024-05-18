@@ -3,15 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Quiz</title>
+    <title>Enter your Pseudo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Enter your Pseudo</h1>
-    <form method="POST" class="pseudo-form">
-        <label for="pseudo">Pseudo:</label>
-        <input type="text" id="pseudo" name="pseudo" required>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="form-container">
+        <h1>Enter your Pseudo</h1>
+        <form method="POST" class="pseudo-form">
+            <label for="pseudo">Pseudo:</label>
+            <input type="text" id="pseudo" name="pseudo" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="rather_not_say" selected>Rather not say</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" max="100" value="0" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
