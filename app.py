@@ -48,7 +48,7 @@ def pseudo():
 def index():
     if 'pseudo' not in session:
         return redirect(url_for('pseudo'))
-    random_movies = np.random.choice(unique_movies, 8, replace=False).tolist()
+    random_movies = np.random.choice(unique_movies, 6, replace=False).tolist()
     return render_template('index.html', movies=random_movies)
 
 @app.route('/quiz/<video_id>', methods=['GET', 'POST'])
