@@ -1,1 +1,22 @@
 pseudo,gender,age,video_id,question_id,selected_option,watched
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_01,Four.,False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_02,"Playing, chatting.",False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_03,Amos fears leaving his neighborhood and dislikes his friends' antics.,False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_04,A mysterious stranger.,False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_05,Amos spills a drink on Alec.,False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_06,A peaceful resolution is reached between them.,False
+rid,rather_not_say,0,nsoo2P4OzPs,nsoo2P4OzPs_07,Amos defuses the situation and leaves unharmed.,False
+rr,rather_not_say,0,EvfffIIJ0d0,EvfffIIJ0d0_01,Daniel,False
+rr,rather_not_say,0,EvfffIIJ0d0,EvfffIIJ0d0_02,The retirement celebration of his father,False
+rr,rather_not_say,0,EvfffIIJ0d0,EvfffIIJ0d0_03,He feels an intense déjà vu with every interaction,False
+rr,rather_not_say,0,EvfffIIJ0d0,EvfffIIJ0d0_04,They are distant cousins,False
+rr,rather_not_say,0,EvfffIIJ0d0,EvfffIIJ0d0_05,Memories of his childhood adventures,False
+r,rather_not_say,0,bRxOkUvNnLI,bRxOkUvNnLI_01,Ava drowns after falling into her pool at night.,True
+r,rather_not_say,0,bRxOkUvNnLI,bRxOkUvNnLI_02,"Ava's consciousness is trapped inside her old, destroyed body.",True
+r,rather_not_say,0,bRxOkUvNnLI,bRxOkUvNnLI_03,Ava's consciousness is downloaded by a cloud computer.,True
+r,rather_not_say,0,bRxOkUvNnLI,bRxOkUvNnLI_04,Because the download process experiences a critical error.,True
+r,rather_not_say,0,qChqJnRQMvw,qChqJnRQMvw_01,Phil is a divorced father.,True
+r,rather_not_say,0,qChqJnRQMvw,qChqJnRQMvw_02,He accidentally locks his keys in the car.,True
+r,rather_not_say,0,qChqJnRQMvw,qChqJnRQMvw_03,He conceals it in a box.,True
+r,rather_not_say,0,qChqJnRQMvw,qChqJnRQMvw_04,Phil learns his ex-wife is moving to another country.,True
+r,rather_not_say,0,qChqJnRQMvw,qChqJnRQMvw_05,Phil's daughter's favorite cartoon character.,True

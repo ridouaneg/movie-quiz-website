@@ -10,7 +10,7 @@
     <h1>Movie Quiz</h1>
     <div class="movie-list">
         {% for movie in movies %}
-            <a href="{{ url_for('quiz', video_id=movie.video_id) }}" class="movie-item-link">
+            <a href="{{ url_for('full_quiz', video_id=movie.video_id) }}" class="movie-item-link">
                 <div class="movie-item">
                     <div class="thumbnail-container">
                         <img src="{{ movie.thumbnail }}" alt="Movie Thumbnail" class="thumbnail">

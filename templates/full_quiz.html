@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Quiz</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentQuestion = 0;
+            const questions = document.querySelectorAll('.quiz-question');
+            const nextButton = document.getElementById('next-button');
+            const submitButton = document.getElementById('submit-button');
+            
+            function showQuestion(index) {
+                questions.forEach((question, i) => {
+                    question.style.display = (i === index) ? 'block' : 'none';
+                });
+                nextButton.style.display = (index === questions.length - 1) ? 'none' : 'inline-block';
+                submitButton.style.display = (index === questions.length - 1) ? 'inline-block' : 'none';
+            }
+
+            function isQuestionAnswered(index) {
+                const options = questions[index].querySelectorAll('input[type="radio"]');
+                for (let option of options) {
+                    if (option.checked) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            nextButton.addEventListener('click', () => {
+                if (isQuestionAnswered(currentQuestion)) {
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                    }
+                } else {
+                    alert('Please answer the question before going to the next one.');
+                }
+            });
+
+            showQuestion(currentQuestion);  // Show the first question
+        });
+    </script>
 </head>
 <body>
     <div class="quiz-container">
@@ -24,9 +63,14 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <hr class="question-divider">
+                    {% if not loop.last %}
+                        <hr class="question-divider">
+                    {% endif %}
                 {% endfor %}
-                <button type="submit" class="submit-button">Submit Answers</button>
+                <div class="navigation-buttons">
+                    <button type="button" id="next-button" class="nav-button">Next Question</button>
+                    <button type="submit" id="submit-button" class="submit-button">Submit Answers</button>
+                </div>
             </form>
         {% else %}
             <p>No questions found for this movie.</p>
