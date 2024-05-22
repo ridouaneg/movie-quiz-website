@@ -62,6 +62,12 @@
                                 <label for="option_{{ question.question_id }}_{{ i }}">{{ question['option_' ~ i] }}</label>
                             </div>
                         {% endfor %}
+                        {% if muted_version %}
+                            <div class="visual-only">
+                                <input type="checkbox" id="visual_only_{{ question.question_id }}" name="visual_only_{{ question.question_id }}">
+                                <label for="visual_only_{{ question.question_id }}">This question only required visual information</label>
+                            </div>
+                        {% endif %}
                     </div>
                     {% if not loop.last %}
                         <hr class="question-divider">

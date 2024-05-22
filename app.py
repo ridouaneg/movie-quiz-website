@@ -17,10 +17,10 @@ def read_csv(file_path):
             data.append(row)
     return data
 
-def save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched):
+def save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched, visual_only):
     with open('answers.csv', 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([pseudo, gender, age, video_id, question_id, selected_option, watched])
+        writer.writerow([pseudo, gender, age, video_id, question_id, selected_option, watched, visual_only])
 
 def get_unique_movies(movies):
     unique_movies = {}
@@ -38,9 +38,11 @@ def pseudo():
         pseudo = request.form.get('pseudo')
         gender = request.form.get('gender')
         age = request.form.get('age')
+        muted_version = request.form.get('muted_version') == 'on'
         session['pseudo'] = pseudo
         session['gender'] = gender
         session['age'] = age
+        session['muted_version'] = muted_version
         return redirect(url_for('index'))
     return render_template('pseudo.html')
 
@@ -58,6 +60,7 @@ def quiz(video_id):
 
     questions = [movie for movie in movies if movie['video_id'] == video_id]
     movie_title = questions[0]['movie_title'] if questions else 'Unknown Title'
+    muted_version = session.get('muted_version', False)
 
     if request.method == 'POST':
         pseudo = session['pseudo']
@@ -66,11 +69,12 @@ def quiz(video_id):
         for question in questions:
             question_id = question['question_id']
             selected_option = request.form.get(f'option_{question_id}')
+            visual_only = request.form.get(f'visual_only_{question_id}') == 'on'
             if selected_option:
-                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=False)
+                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=False, visual_only=visual_only)
         return redirect(url_for('full_quiz', video_id=video_id))
 
-    return render_template('quiz.html', questions=questions, movie_title=movie_title)
+    return render_template('quiz.html', questions=questions, movie_title=movie_title, muted_version=muted_version)
 
 @app.route('/full_quiz/<video_id>', methods=['GET', 'POST'])
 def full_quiz(video_id):
@@ -79,6 +83,7 @@ def full_quiz(video_id):
 
     questions = [movie for movie in movies if movie['video_id'] == video_id]
     movie_title = questions[0]['movie_title'] if questions else 'Unknown Title'
+    muted_version = session.get('muted_version', False)
 
     if request.method == 'POST':
         pseudo = session['pseudo']
@@ -87,11 +92,12 @@ def full_quiz(video_id):
         for question in questions:
             question_id = question['question_id']
             selected_option = request.form.get(f'option_{question_id}')
+            visual_only = request.form.get(f'visual_only_{question_id}') == 'on'
             if selected_option:
-                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=True)
+                save_answer(pseudo, gender, age, video_id, question_id, selected_option, watched=True, visual_only=visual_only)
         return redirect(url_for('index'))
 
-    return render_template('full_quiz.html', questions=questions, movie_title=movie_title)
+    return render_template('full_quiz.html', questions=questions, movie_title=movie_title, muted_version=muted_version)
 
 if __name__ == '__main__':
     app.run(debug=True)
